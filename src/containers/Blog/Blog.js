@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import axios from 'axios'
 
 import Post from '../../components/Post/Post';
@@ -10,23 +10,29 @@ class Blog extends Component {
 
     state = {
         posts: [],
-        selectedPostId: null
+        selectedPostId: null,
+        error: false
     }
 
     componentDidMount() {
         //since this happens asynchronously, we treat is at a promise when we call the url and wait until it gets the request, and then we execute something
         //but it won'' happen right away
-        axios.get('https://jsonplaceholder.typicode.com/posts')
+        //this URL will fail, so when component gets mounted will show the error
+        axios.get('https://jsonplaceholder.typicode.com/postss')
             .then(response => {
                 console.log(response);
-                const posts = response.data.slice(0,4);
+                const posts = response.data.slice(0, 4);
                 const updatedPosts = posts.map(post => {
                     return {
                         ...post,
                         author: 'Max'
                     }
                 });
-                this.setState({posts:updatedPosts})
+                this.setState({posts: updatedPosts})
+            })
+            .catch(error => {
+                console.log(error);
+                this.setState({error: true})
             })
     }
 
@@ -34,17 +40,23 @@ class Blog extends Component {
         this.setState({selectedPostId: id})
     }
 
-    render () {
+    render() {
 
-        const posts = this.state.posts.map(post => {
-            //Never forget to set the key
-            return <Post
-                key={post.id}
-                title={post.title}
-                author={post.author}
-                clicked={() => this.postSelectHandler(post.id)}
-            />;
-        })
+        let posts;
+
+        if (this.state.error) {
+            posts = <p>Something went wrong</p>
+        } else {
+            posts = this.state.posts.map(post => {
+                //Never forget to set the key
+                return <Post
+                    key={post.id}
+                    title={post.title}
+                    author={post.author}
+                    clicked={() => this.postSelectHandler(post.id)}
+                />;
+            })
+        }
 
         return (
             <div>
@@ -55,7 +67,7 @@ class Blog extends Component {
                     <FullPost id={this.state.selectedPostId}/>
                 </section>
                 <section>
-                    <NewPost />
+                    <NewPost/>
                 </section>
             </div>
         );

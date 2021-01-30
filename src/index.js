@@ -5,6 +5,11 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import axios from "axios";
 
+//Here we can set global props to execute our calls
+axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com';
+axios.defaults.headers.common['Authorization'] = 'AUTH TOKEN';
+axios.defaults.headers.post['Content-Type'] = 'application/json';
+
 //These interceptors are set globally, or in a specific component for a global scope, so that we can set the
 //Request headers od authorizations, most of the time
 axios.interceptors.request.use(requestConfig => {

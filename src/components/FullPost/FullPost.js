@@ -17,7 +17,7 @@ class FullPost extends Component {
         if (this.props.id) {
             //we load de loaded post if is a new one, or if there is an existing one but its id is different from the one that is trying to be fetched
             if( !this.state.loadedPost || ( this.state.loadedPost && this.state.loadedPost.id !== this.props.id ))
-            axios.get('https://jsonplaceholder.typicode.com/posts/' + this.props.id)
+            axios.get('/posts/' + this.props.id)
                 .then(response => {
                     console.log(response)
                     //here we are setting the state of loaded post to the data we receive from our query
@@ -28,7 +28,7 @@ class FullPost extends Component {
 
     deletePostHandler = () => {
         //here we are using the same id that we get when the object is loaded from the API by id
-        axios.delete('https://jsonplaceholder.typicode.com/posts/' + this.props.id).then(response => console.log(response));
+        axios.delete('/posts/' + this.props.id).then(response => console.log(response));
     }
 
     render() {

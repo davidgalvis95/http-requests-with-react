@@ -16,7 +16,7 @@ class Blog extends Component {
 
     componentDidMount() {
         //since this happens asynchronously, we treat is at a promise when we call the url and wait until it gets the request, and then we execute something
-        //but it won'' happen right away
+        //but it won't happen right away
         //this URL will fail, so when component gets mounted will show the error
         axios.get('https://jsonplaceholder.typicode.com/postss')
             .then(response => {

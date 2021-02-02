@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios'
+//This is the file where we have defined the new instance with the 'custom' values
+import axios from '../../axios'
 
 import Post from '../../components/Post/Post';
 import FullPost from '../../components/FullPost/FullPost';

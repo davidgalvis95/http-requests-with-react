@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-//This is the file where we have defined the new instance with the 'custom' values
-import axios from '../../axios'
+import { Route } from 'react-router-dom';
 
 import Posts from '../Posts/Posts';
 
@@ -20,7 +19,12 @@ class Blog extends Component {
                         </ul>
                     </nav>
                 </header>
-                <Posts/>
+                    {/*By adding a Route and specifying the path then we get react to navigate and display the components we want it to display*/}
+                    <Route path="/" exact render={() => <Posts/>} />
+                    {/*By default if we do not specify the exact property and there is no route defined for other path, all the child objects that are not defined will show the
+                    components that are defined in the parent route e.g. if the route is "/new-post, and there is nothing defined to it, then the parent,
+                    in this case "/" will show its components on it*/}
+                    <Route path="/" render={() => <h1>Hello</h1>} />
             </div>
         );
     }

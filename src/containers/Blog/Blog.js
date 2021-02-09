@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 import Posts from '../Posts/Posts';
 import NewPost from "../NewPost/NewPost";
@@ -15,8 +15,17 @@ class Blog extends Component {
                 <header className="Blog">
                     <nav>
                         <ul>
-                            <li><a href="/">Home</a></li>
-                            <li><a href="/new-post">New Post</a></li>
+                            {/*The link in contrast with the <a> does not make reload the page and hence lose the context, neither send again the request
+                            it just handles the redirection internally if it comes from some feature that is in the application and not outside it*/}
+                            <li><Link to="/">Home</Link></li>
+                            <li><Link to={{
+                                //This is the path name where we want it to go
+                                pathname: '/new-post',
+                                //Advanced feature to tag something that will lead us to jump into that tagged thing (this is a example)
+                                hash: '#submit',
+                                //Advanced feature to set query params to be passed (this is a example)
+                                search: '?quick-submit=true'
+                            }}>New Post</Link></li>
                         </ul>
                     </nav>
                 </header>

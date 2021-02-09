@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Route } from 'react-router-dom';
 
 import Posts from '../Posts/Posts';
+import NewPost from "../NewPost/NewPost";
 
 import './Blog.css';
 
@@ -28,6 +29,8 @@ class Blog extends Component {
 
                 {/*this is the most effective way of rendering a component, the last one is just use for short info messages or something like that */}
                 <Route path="/" exact component={Posts} />
+                {/*We have remove the exact because we may want to handle all the new posts with that route, like 1,2 ...*/}
+                <Route path="/new-post" component={NewPost} />
             </div>
         );
     }

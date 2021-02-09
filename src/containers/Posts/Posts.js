@@ -10,6 +10,8 @@ class Posts extends Component {
     }
 
     componentDidMount() {
+        //here we see the props that are loading and we can see that history, location and match are properties loaded by the Router
+        console.log(this.props);
         //since this happens asynchronously, we treat is at a promise when we call the url and wait until it gets the request, and then we execute something
         //but it won't happen right away
         //with the baseURL set there is no need of it here

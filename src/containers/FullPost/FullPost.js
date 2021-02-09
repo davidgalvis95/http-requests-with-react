@@ -16,14 +16,19 @@ class FullPost extends Component {
     componentDidUpdate(prevProps, prevState, prevContext) {
         if (this.props.id) {
             //we load de loaded post if is a new one, or if there is an existing one but its id is different from the one that is trying to be fetched
-            if( !this.state.loadedPost || ( this.state.loadedPost && this.state.loadedPost.id !== this.props.id ))
-            axios.get('/posts/' + this.props.id)
-                .then(response => {
-                    console.log(response)
-                    //here we are setting the state of loaded post to the data we receive from our query
-                    this.setState({loadedPost: response.data});
-                });
+            if( !this.state.loadedPost || ( this.state.loadedPost && this.state.loadedPost.id !== this.props.id )){
+                axios.get('/posts/' + this.props.id)
+                    .then(response => {
+                        console.log(response)
+                        //here we are setting the state of loaded post to the data we receive from our query
+                        this.setState({loadedPost: response.data});
+                    });
+            }
         }
+    }
+
+    componentDidMount() {
+        console.log(this.props)
     }
 
     deletePostHandler = () => {

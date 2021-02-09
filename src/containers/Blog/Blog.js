@@ -19,6 +19,9 @@ class Blog extends Component {
                             <li><Link to="/">Home</Link></li>
                             <li><Link to={{
                                 //This is the path name where we want it to go
+                                //this create a relative path appended to the path of the component that is already loaded
+                                // pathname: this.props.match.url + '/new-post',
+                                //this is an absolute path appended to the domain of the host
                                 pathname: '/new-post',
                                 //Advanced feature to tag something that will lead us to jump into that tagged thing (this is a example)
                                 hash: '#submit',

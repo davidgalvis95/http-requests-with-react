@@ -5,6 +5,7 @@ import Posts from '../Posts/Posts';
 import NewPost from "../NewPost/NewPost";
 
 import './Blog.css';
+import FullPost from "../FullPost/FullPost";
 
 class Blog extends Component {
 
@@ -17,10 +18,11 @@ class Blog extends Component {
                             {/*The link in contrast with the <a> does not make reload the page and hence lose the context, neither send again the request
                             it just handles the redirection internally if it comes from some feature that is in the application and not outside it*/}
                             {/*NavLink generates new features to work with*/}
+                            {/*When using NavLink we have by default the "active" class but we can override that one and in fact generate de facto in line
+                                         style instead of css classes */}
+                            {/*The context needs to be specified as exact so that if "/" it wont take as active the child or appended paths*/}
                             <li><NavLink to="/"
                                          exact
-                                         {/*When using NavLink we have by default the "active" class but we can override that one and in fact generate de facto in line
-                                         style instead of css classes */}
                                          activeClassName="my-active"
                                          activeStyle={{
                                              color: '#fa923f',
@@ -52,6 +54,8 @@ class Blog extends Component {
                 <Route path="/" exact component={Posts} />
                 {/*We have remove the exact because we may want to handle all the new posts with that route, like 1,2 ...*/}
                 <Route path="/new-post" component={NewPost} />
+                {/*We have to be careful in the order these Routes are ordered if one is similar to others, I mean "/new-post" could be interpreted the same as "/:id" */}
+                <Route path="/post/:id" component={FullPost} />
             </div>
         );
     }

@@ -5,3 +5,8 @@
     width: 80%;
     margin: auto;
 }
+
+.link-class {
+    text-decoration: none;
+    color: black;
+}

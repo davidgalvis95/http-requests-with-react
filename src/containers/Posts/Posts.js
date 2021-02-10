@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import axios from "../../axios";
 import Post from "../../components/Post/Post";
 import "./Posts.css"
+import {Link} from "react-router-dom";
 
 class Posts extends Component {
 
@@ -45,12 +46,16 @@ class Posts extends Component {
         } else {
             posts = this.state.posts.map(post => {
                 //Never forget to set the key
-                return <Post
-                    key={post.id}
-                    title={post.title}
-                    author={post.author}
-                    clicked={() => this.postSelectHandler(post.id)}
-                />;
+                return (
+                    //The approach of the link that renders a post dynamically by the id considering the Route already set
+                    //Now that the new object that will be shown based on an id is the Link, the key must be passed there instead of the Post
+                    <Link className="link-class" to={'/post/' + post.id} key={post.id}>
+                        <Post
+                            title={post.title}
+                            author={post.author}
+                            clicked={() => this.postSelectHandler(post.id)}
+                        />
+                    </Link> )
             })
         }
 

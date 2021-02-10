@@ -6,6 +6,7 @@ import NewPost from "../NewPost/NewPost";
 
 import './Blog.css';
 import FullPost from "../FullPost/FullPost";
+import {Switch} from "react-router";
 
 class Blog extends Component {
 
@@ -49,13 +50,16 @@ class Blog extends Component {
                     components that are defined in the parent route e.g. if the route is "/new-post, and there is nothing defined to it, then the parent,
                     in this case "/" will show its components on it*/}
                     {/*<Route path="/" render={() => <h1>Hello</h1>} />*/}
-
                 {/*this is the most effective way of rendering a component, the last one is just use for short info messages or something like that */}
                 <Route path="/" exact component={Posts} />
-                {/*We have remove the exact because we may want to handle all the new posts with that route, like 1,2 ...*/}
-                <Route path="/new-post" component={NewPost} />
-                {/*We have to be careful in the order these Routes are ordered if one is similar to others, I mean "/new-post" could be interpreted the same as "/:id" */}
-                <Route path="/post/:id" exact component={FullPost} />
+                {/*the Switch component of Router enables us to choose between two Routes that seem similar but are not similar, because in this case the "/:id" as it is
+                flexible, react can interpret that "/new-post" is also an id, which is not correct*/}
+                <Switch>
+                    {/*We have remove the exact because we may want to handle all the new posts with that route, like 1,2 ...*/}
+                    <Route path="/new-post" component={NewPost} />
+                    {/*We have to be careful in the order these Routes are ordered if one is similar to others, I mean "/new-post" could be interpreted the same as "/:id" */}
+                    <Route path="/:id" exact component={FullPost} />
+                </Switch>
             </div>
         );
     }

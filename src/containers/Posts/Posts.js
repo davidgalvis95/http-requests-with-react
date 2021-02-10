@@ -49,7 +49,7 @@ class Posts extends Component {
                 return (
                     //The approach of the link that renders a post dynamically by the id considering the Route already set
                     //Now that the new object that will be shown based on an id is the Link, the key must be passed there instead of the Post
-                    <Link className="link-class" to={'/post/' + post.id} key={post.id}>
+                    <Link className="link-class" to={'/' + post.id} key={post.id}>
                         <Post
                             title={post.title}
                             author={post.author}

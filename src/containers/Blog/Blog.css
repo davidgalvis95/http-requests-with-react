@@ -17,7 +17,9 @@
 }
 
 .Blog a:hover,
-.Blog a:active {
+.Blog a:active,
+/*This means that all the ones that have this class active will have this class when using NavLink*/
+.Blog a.active {
     color: #fa923f;
 }
 

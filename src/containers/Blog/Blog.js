@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, NavLink } from 'react-router-dom';
 
 import Posts from '../Posts/Posts';
 import NewPost from "../NewPost/NewPost";
@@ -16,8 +16,18 @@ class Blog extends Component {
                         <ul>
                             {/*The link in contrast with the <a> does not make reload the page and hence lose the context, neither send again the request
                             it just handles the redirection internally if it comes from some feature that is in the application and not outside it*/}
-                            <li><Link to="/">Home</Link></li>
-                            <li><Link to={{
+                            {/*NavLink generates new features to work with*/}
+                            <li><NavLink to="/"
+                                         exact
+                                         {/*When using NavLink we have by default the "active" class but we can override that one and in fact generate de facto in line
+                                         style instead of css classes */}
+                                         activeClassName="my-active"
+                                         activeStyle={{
+                                             color: '#fa923f',
+                                             textDecoration: 'underline'
+                                         }}
+                            >Home</NavLink></li>
+                            <li><NavLink to={{
                                 //This is the path name where we want it to go
                                 //this create a relative path appended to the path of the component that is already loaded
                                 // pathname: this.props.match.url + '/new-post',
@@ -27,7 +37,7 @@ class Blog extends Component {
                                 hash: '#submit',
                                 //Advanced feature to set query params to be passed (this is a example)
                                 search: '?quick-submit=true'
-                            }}>New Post</Link></li>
+                            }}>New Post</NavLink></li>
                         </ul>
                     </nav>
                 </header>

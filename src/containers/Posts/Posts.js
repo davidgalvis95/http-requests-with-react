@@ -35,7 +35,11 @@ class Posts extends Component {
     }
 
     postSelectHandler = (id) => {
-        this.setState({selectedPostId: id})
+        //we dont want to change the state anymore but navigate to a new page
+        //to do so we can seize the fact that the history prop of the Router has a push property that works the same as the Link
+        this.props.history.push({pathname: '/' + id});
+        //this approach works the same as the one in the line above
+        // this.props.history.push('/' + id);
     }
 
     render() {
@@ -49,13 +53,15 @@ class Posts extends Component {
                 return (
                     //The approach of the link that renders a post dynamically by the id considering the Route already set
                     //Now that the new object that will be shown based on an id is the Link, the key must be passed there instead of the Post
-                    <Link className="link-class" to={'/' + post.id} key={post.id}>
+                    // <Link className="link-class" to={'/' + post.id} key={post.id}>
                         <Post
+                            key={post.id}
                             title={post.title}
                             author={post.author}
                             clicked={() => this.postSelectHandler(post.id)}
                         />
-                    </Link> )
+                    // </Link>
+                )
             })
         }
 

@@ -55,7 +55,7 @@ class Blog extends Component {
                 {/*We have remove the exact because we may want to handle all the new posts with that route, like 1,2 ...*/}
                 <Route path="/new-post" component={NewPost} />
                 {/*We have to be careful in the order these Routes are ordered if one is similar to others, I mean "/new-post" could be interpreted the same as "/:id" */}
-                <Route path="/post/:id" component={FullPost} />
+                <Route path="/post/:id" exact component={FullPost} />
             </div>
         );
     }

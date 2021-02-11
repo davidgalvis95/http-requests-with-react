@@ -19,18 +19,24 @@ class NewPost extends Component {
             body: this.state.content,
             author: this.state.author
         }
-        axios.post('/posts/', data).then( response => console.log(response) )
-        this.setState({getRequestIsSent:true})
+        axios.post('/posts', data).then( response => {
+            console.log(response);
+            //The push method acts like a redirect, but it allow us to go back to the last page because it does not replaces the stack of pages
+            // this.props.history.push('/posts/');
+            //The replace method acts like a redirect, because if I want to go back to the last page I won't be able to, because redirect and replace, replaces the stack of pages
+            this.props.history.replace('/posts/');
+        } )
+        // this.setState({getRequestIsSent:true})
     }
 
     render () {
-        let redirect= null;
-        if(this.state.getRequestIsSent){
-            redirect = <Redirect to="/posts/"/>;
-        }
+        // let redirect= null;
+        // if(this.state.getRequestIsSent){
+        //     redirect = <Redirect to="/posts/"/>;
+        // }
         return (
             <div className="NewPost">
-                {redirect}
+                {/*{redirect}*/}
                 <h1>Add a Post</h1>
                 <label>Title</label>
                 <input type="text" value={this.state.title} onChange={(event) => this.setState({title: event.target.value})} />

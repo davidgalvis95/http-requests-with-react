@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-import { Route, NavLink } from 'react-router-dom';
+import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 
 import Posts from '../Posts/Posts';
 import NewPost from "../NewPost/NewPost";
 
 import './Blog.css';
-import FullPost from "../FullPost/FullPost";
-import {Switch} from "react-router";
 
 class Blog extends Component {
 
@@ -58,6 +56,9 @@ class Blog extends Component {
                     {/*<Route path="/" render={() => <h1>Hello</h1>} />*/}
                     {/*this is the most effective way of rendering a component, the last one is just use for short info messages or something like that */}
                     <Route path="/posts/" component={Posts} />
+                    {/*this is for redirecting the user for another link*/}
+                    {/*<Route path="/" component={Posts} />*/}
+                    <Redirect from="/" to="/posts/" />
                 {/*</Switch>*/}
             </div>
         );

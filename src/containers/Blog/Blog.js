@@ -65,7 +65,9 @@ class Blog extends Component {
                     <Route path="/posts/" component={Posts} />
                     {/*this is for redirecting the user for another link*/}
                     {/*<Route path="/" component={Posts} />*/}
-                    <Redirect from="/" to="/posts/" />
+                    {/*thi s a way of handling 404*/}
+                    <Route render={()=><h1>Not found</h1>} />
+                    {/*<Redirect from="/" to="/posts/" />*/}
                 </Switch>
             </div>
         );

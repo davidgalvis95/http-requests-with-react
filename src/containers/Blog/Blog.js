@@ -8,6 +8,10 @@ import './Blog.css';
 
 class Blog extends Component {
 
+    state = {
+        auth: false
+    }
+
     render() {
         return (
             <div>
@@ -35,9 +39,9 @@ class Blog extends Component {
                                 //this is an absolute path appended to the domain of the host
                                 pathname: '/new-post',
                                 //Advanced feature to tag something that will lead us to jump into that tagged thing (this is a example)
-                                hash: '#submit',
+                                // hash: '#submit',
                                 //Advanced feature to set query params to be passed (this is a example)
-                                search: '?quick-submit=true'
+                                // search: '?quick-submit=true'
                             }}>New Post</NavLink></li>
                         </ul>
                     </nav>
@@ -50,16 +54,19 @@ class Blog extends Component {
 
                 {/*the Switch component of Router enables us to choose between two Routes that seem similar but are not similar, because in this case the "/:id" as it is
                 flexible, react can interpret that "/new-post" is also an id, which is not correct*/}
-                {/*<Switch>*/}
+                {/*If I want to redirect once a url that is not 'authed' is reached, then I should enclose the Routes with a Switch statement
+                Otherwise the routes will only interpret the to component*/}
+                <Switch>
                     {/*We have remove the exact because we may want to handle all the new posts with that route, like 1,2 ...*/}
-                    <Route path="/new-post" component={NewPost} />
+                    {/*This acts as a guard, which is pretty different from what we have in Angular, basically is avoiding to load */}
+                    {this.state.auth?<Route path="/new-post" component={NewPost} />:null}
                     {/*<Route path="/" render={() => <h1>Hello</h1>} />*/}
                     {/*this is the most effective way of rendering a component, the last one is just use for short info messages or something like that */}
                     <Route path="/posts/" component={Posts} />
                     {/*this is for redirecting the user for another link*/}
                     {/*<Route path="/" component={Posts} />*/}
                     <Redirect from="/" to="/posts/" />
-                {/*</Switch>*/}
+                </Switch>
             </div>
         );
     }

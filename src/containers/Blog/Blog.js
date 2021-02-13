@@ -2,14 +2,18 @@ import React, {Component} from 'react';
 import { Route, NavLink, Switch, Redirect } from 'react-router-dom';
 
 import Posts from '../Posts/Posts';
-import NewPost from "../NewPost/NewPost";
-
+// import NewPost from "../NewPost/NewPost";
+import asyncComponent from "../../hoc/asyncComponent";
 import './Blog.css';
+
+const AsyncNewPost = asyncComponent(() => {
+    return import('../NewPost/NewPost')
+});
 
 class Blog extends Component {
 
     state = {
-        auth: false
+        auth: true
     }
 
     render() {
@@ -59,7 +63,7 @@ class Blog extends Component {
                 <Switch>
                     {/*We have remove the exact because we may want to handle all the new posts with that route, like 1,2 ...*/}
                     {/*This acts as a guard, which is pretty different from what we have in Angular, basically is avoiding to load */}
-                    {this.state.auth?<Route path="/new-post" component={NewPost} />:null}
+                    {this.state.auth?<Route path="/new-post" component={AsyncNewPost} />:null}
                     {/*<Route path="/" render={() => <h1>Hello</h1>} />*/}
                     {/*this is the most effective way of rendering a component, the last one is just use for short info messages or something like that */}
                     <Route path="/posts/" component={Posts} />
